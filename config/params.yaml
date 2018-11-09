@@ -1,0 +1,41 @@
+ctrl:
+  feat_ext: true
+  learn: true
+  dataset: proto5
+  train_data: noisy
+extract:
+  audio_len_s: 2
+  eps: 2.220446049250313e-16
+  fmax: 22050
+  fmin: 0
+  fs: 44100
+  hop_length_samples: 882
+  load_mode: varup
+  log: true
+  mono: true
+  n_fft: 2048
+  n_mels: 96
+  normalize_audio: true
+  patch_hop: 50
+  patch_len: 100
+  spectrogram_type: power
+  win_length_samples: 1764
+learn:
+  batch_size: 64
+  lr: 0.001
+  n_classes: 20
+  n_epochs: 160
+  optim: Adam
+  patience: 15
+  val_split: 0.15
+loss:
+  l_loss: 2.1
+  m_loss: 0.8
+  q_loss: 0.6
+  reed_beta: 0.6
+  type: lq_loss
+recognizer:
+  aggregate: gmean
+suffix:
+  in: _mel
+  out: _label
