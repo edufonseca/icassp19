@@ -2,7 +2,7 @@
 
 #########################################################################
 # Copyright Eduardo Fonseca 2018, v1.0
-# This software is distributed under the terms of the License GNU AFFERO GENERAL PUBLIC LICENSE
+# This software is distributed under the terms of the MIT License
 #
 # If you use this code or part of it, please cite the following paper:
 # Eduardo Fonseca, Manoj Plakal, Daniel P. W. Ellis, Frederic Font, Xavier Favory, Xavier Serra, "Learning Sound Event
