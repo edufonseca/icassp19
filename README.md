@@ -5,7 +5,10 @@ This repository contains the code corresponding to the following paper. If you u
 
 The framework comprises all the basic stages: feature extraction, training, inference and evaluation.
 
-NOTE: The code is available and it is functional. The dataset will hopefully be made available in the coming days through Zenodo (linked from this repository). In addition, extended descriptions of the dataset and baseline system will be made available.
+**NOTES**: 
+- The code is available and it is functional. 
+- The FSDnoisy18k dataset is available from its companion site: <a href="http://www.eduardofonseca.net/FSDnoisy18k/" target="_blank">http://www.eduardofonseca.net/FSDnoisy18k/</a>. 
+- In addition, an extended description of the baseline system will be made available soon.
 
 ## Dependencies
 This framework is tested on Ubuntu 17.10 using a conda environment. To duplicate the conda environment:
