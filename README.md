@@ -1,4 +1,6 @@
 
+## Learning Sound Event Classifiers from Web Audio with Noisy Labels
+
 This repository contains the code corresponding to the following paper. If you use this code or part of it, please cite:
 
 >Eduardo Fonseca, Manoj Plakal, Daniel P. W. Ellis, Frederic Font, Xavier Favory, Xavier Serra, "Learning Sound Event Classifiers from Web Audio with Noisy Labels", Submitted to *Proc. IEEE ICASSP 2019*, Brighton, UK, 2019
