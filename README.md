@@ -7,7 +7,7 @@ The framework comprises all the basic stages: feature extraction, training, infe
 
 **NOTES**: 
 - The code is available and it is functional. 
-- The FSDnoisy18k dataset is available from its companion site: <a href="http://www.eduardofonseca.net/FSDnoisy18k/" target="_blank">http://www.eduardofonseca.net/FSDnoisy18k/</a>. 
+- The FSDnoisy18k dataset described in the ICASSP2019 paper is available from its companion site: <a href="http://www.eduardofonseca.net/FSDnoisy18k/" target="_blank">http://www.eduardofonseca.net/FSDnoisy18k/</a>. 
 - In addition, an extended description of the baseline system will be made available soon.
 
 ## Dependencies
