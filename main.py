@@ -174,9 +174,6 @@ params_learn['noisy_ids'] = noisy_ids
 filelist_audio_tr_nV_small_dur = train_csv.nV_small_dur.values.tolist()
 idx_nV_small_dur = [i for i, x in enumerate(filelist_audio_tr_nV_small_dur) if x == 1]
 
-filelist_audio_tr_nV_small_clips = train_csv.nV_small_clips.values.tolist()
-idx_nV_small_clips= [i for i, x in enumerate(filelist_audio_tr_nV_small_clips) if x == 1]
-
 
 # create dict with ground truth mapping with labels:
 # -key: path to wav

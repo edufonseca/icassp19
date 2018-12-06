@@ -22,38 +22,38 @@ def get_model_baseline(params_learn=None, params_extract=None):
     spec_x = spec_start
 
     # l1
-    spec_x = BatchNormalization(axis=1, input_shape=input_shape)(spec_x)
+    spec_x = BatchNormalization(axis=1)(spec_x)
     spec_x = Activation('relu')(spec_x)
 
     spec_x = Conv2D(24, (5, 5),
                     padding='same',  # fmap has same size as input
                     kernel_initializer='he_normal',
                     data_format='channels_first')(spec_x)
-    spec_x = BatchNormalization(axis=1, input_shape=input_shape)(spec_x)
+    spec_x = BatchNormalization(axis=1)(spec_x)
     spec_x = Activation('relu')(spec_x)
     spec_x = MaxPooling2D(pool_size=(4, 2), data_format="channels_first")(spec_x)
 
     # l2
-    spec_x = BatchNormalization(axis=1, input_shape=input_shape)(spec_x)
+    spec_x = BatchNormalization(axis=1)(spec_x)
     spec_x = Activation('relu')(spec_x)
 
     spec_x = Conv2D(48, (5, 5),
                     padding='same',  # fmap has same size as input
                     kernel_initializer='he_normal',
                     data_format='channels_first')(spec_x)
-    spec_x = BatchNormalization(axis=1, input_shape=input_shape)(spec_x)
+    spec_x = BatchNormalization(axis=1)(spec_x)
     spec_x = Activation('relu')(spec_x)
     spec_x = MaxPooling2D(pool_size=(4, 2), data_format="channels_first")(spec_x)
 
     # l3
-    spec_x = BatchNormalization(axis=1, input_shape=input_shape)(spec_x)
+    spec_x = BatchNormalization(axis=1)(spec_x)
     spec_x = Activation('relu')(spec_x)
 
     spec_x = Conv2D(48, (5, 5),
                     padding='same',  # fmap has same size as input
                     kernel_initializer='he_normal',
                     data_format='channels_first')(spec_x)
-    spec_x = BatchNormalization(axis=1, input_shape=input_shape)(spec_x)
+    spec_x = BatchNormalization(axis=1)(spec_x)
     spec_x = Activation('relu')(spec_x)
 
     spec_x = Flatten()(spec_x)
