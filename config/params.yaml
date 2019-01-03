@@ -29,11 +29,11 @@ learn:
   patience: 15
   val_split: 0.15
 loss:
-  l_loss: 2.1
-  m_loss: 0.8
-  q_loss: 0.6
-  reed_beta: 0.6
-  type: lq_loss
+  l_loss: 1.9
+  m_loss: 0.6
+  q_loss: 0.7
+  reed_beta: 0.3
+  type: lq_loss_origin
 recognizer:
   aggregate: gmean
 suffix:

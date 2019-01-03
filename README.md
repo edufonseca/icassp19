@@ -5,12 +5,9 @@ This repository contains the code corresponding to the following paper. If you u
 
 >Eduardo Fonseca, Manoj Plakal, Daniel P. W. Ellis, Frederic Font, Xavier Favory, Xavier Serra, "Learning Sound Event Classifiers from Web Audio with Noisy Labels", Submitted to *Proc. IEEE ICASSP 2019*, Brighton, UK, 2019
 
-The framework comprises all the basic stages: feature extraction, training, inference and evaluation. After loading the FSDnoisy18k dataset, log-mel energies are computed and a CNN baseline is trained and evaluated. The code also allows to test four noise-robust loss functions. Please check our ICASSP2019 paper for more details.
+The framework comprises all the basic stages: feature extraction, training, inference and evaluation. After loading the FSDnoisy18k dataset, log-mel energies are computed and a CNN baseline is trained and evaluated. The code also allows to test four noise-robust loss functions. Please check our ICASSP2019 paper for more details. The system is implemented in Keras and TensorFlow.
 
-**NOTES**: 
-- The code is available and it is functional. 
-- The FSDnoisy18k dataset described in the ICASSP2019 paper is available from its companion site: <a href="http://www.eduardofonseca.net/FSDnoisy18k/" target="_blank">http://www.eduardofonseca.net/FSDnoisy18k/</a>. 
-- In addition, an extended description of the baseline system will be made available soon.
+The FSDnoisy18k dataset described in our ICASSP2019 paper is available through Zenodo from its companion site: <a href="http://www.eduardofonseca.net/FSDnoisy18k/" target="_blank">http://www.eduardofonseca.net/FSDnoisy18k/</a>. 
 
 ## Dependencies
 This framework is tested on Ubuntu 17.10 using a conda environment. To duplicate the conda environment:
@@ -78,14 +75,30 @@ You can check the `logs/*.out`. Results are shown in a table (you can search for
 
 #### (1) Edit `config/*.yaml` file
 
-  - `ctrl.train_data: clean` # (or any other train subset)
+  - `ctrl.train_data: all` # (or any other train subset)
   - `loss.type: CCE` # this is standard cross entropy loss
  
 #### (2) Execute the code.
 
 ## Baseline system details
 
-Add Figure
+Incoming audio is transformed to 96-band, log-mel spectrogram as input representation.
+To deal with the variable-length clips, we use time-frequency patches of 2s (which is equivalent to 100 frames of 40ms with 50% overlap). Shorter clips are replicated while longer clips are trimmed in several patches inheriting the clip-level label (this is the meaning of the parameter `ctrl.load_mode = varup` in the `config/*.yaml` file).
+
+
+The model used is a CNN (3 conv layers + 1 dense layer) following that of <a href="https://arxiv.org/abs/1608.04363" target="_blank">this paper</a> with two main changes. First, we include Batch Normalization (BN) between each convolutional layer and ReLU non-linearity. Second, we use *pre-activation*, a technique initially devised in <a href="https://arxiv.org/abs/1603.05027" target="_blank">deep residual networks</a> which essentially consists of applying BN and ReLU as pre-activation before each convolutional layer.
+It was proved beneficial for acoustic scene classification in <a href="https://arxiv.org/abs/1806.07506" target="_blank">this paper</a>, where it showed convenient generalization properties. Likewise, in preliminary experiments with FSDnoisy18k it was shown to slightly improve the classification accuracy. The baseline system has 531,624 weights and its architecture is summarized in the next figure.
+
+| ![alt text](/figs/baseline_system_archi_v0.png) |
+|:---:|
+| *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
+
+As for the learning strategy, the default loss function is categorical cross-entropy (CCE), the batch size is 64, and we use Adam optimizer with initial learning rate of 0.001, which is halved whenever the validation accuracy plateaus for 5 epochs. The training samples are shuffled between epochs. Earlystopping is adopted with a patience of 15 epochs on the validation accuracy. To this end, a 15% validation set is split randomly from the training data of every class. This validation split is the random 15% of every class, considering both *clean* and *noisy* subsets together. Preliminary experiments revealed that this provides slightly better results if compared to using **only** the clean subset for validation (which amounts to roughly 10% of the training set, but it is highly imbalanced class-wise, from 6.1% to 22.4%). 
+
+On inference, the prediction for every clip is obtained by computing predictions at the patch level, and aggregating them with geometric mean to produce a clip-level prediction.
+
+The goal of the baseline is to give a sense of the classification accuracy that a well-known architecture can attain and not to maximize the performance. 
+Extensive hyper-parameter tuning or additional model exploration was not conducted.
 
  
 ## Contact
