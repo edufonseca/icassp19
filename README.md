@@ -89,7 +89,8 @@ To deal with the variable-length clips, we use time-frequency patches of 2s (whi
 The model used is a CNN (3 conv layers + 1 dense layer) following that of <a href="https://arxiv.org/abs/1608.04363" target="_blank">this paper</a>, with two main changes. First, we include Batch Normalization (BN) between each convolutional layer and ReLU non-linearity. Second, we use *pre-activation*, a technique initially devised in <a href="https://arxiv.org/abs/1603.05027" target="_blank">deep residual networks</a> which essentially consists of applying BN and ReLU as pre-activation before each convolutional layer.
 It was proved beneficial for acoustic scene classification in <a href="https://arxiv.org/abs/1806.07506" target="_blank">this paper</a>, where it showed convenient generalization properties. Likewise, in preliminary experiments with FSDnoisy18k it was shown to slightly improve the classification accuracy. The baseline system has 531,624 weights and its architecture is summarized in the next figure.
 
-| <img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="500"/>|
+
+| <img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="550"/>|
 |:---:|
 | *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
 
@@ -97,7 +98,11 @@ It was proved beneficial for acoustic scene classification in <a href="https://a
 |:---:|
 | *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
 
-| <img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="700"/>|
+| <img src="/figs/baseline_system_archi_v0.pdf" alt="baseline" width="550"/>|
+|:---:|
+| *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
+
+| <img src="/figs/baseline_system_archi_v0.pdf" alt="baseline" width="600"/>|
 |:---:|
 | *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
 
