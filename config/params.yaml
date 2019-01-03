@@ -33,7 +33,7 @@ loss:
   m_loss: 0.6
   q_loss: 0.7
   reed_beta: 0.3
-  type: lq_loss_origin
+  type: CCE
 recognizer:
   aggregate: gmean
 suffix:
