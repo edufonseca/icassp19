@@ -89,14 +89,17 @@ To deal with the variable-length clips, we use time-frequency patches of 2s (whi
 The model used is a CNN (3 conv layers + 1 dense layer) following that of <a href="https://arxiv.org/abs/1608.04363" target="_blank">this paper</a>, with two main changes. First, we include Batch Normalization (BN) between each convolutional layer and ReLU non-linearity. Second, we use *pre-activation*, a technique initially devised in <a href="https://arxiv.org/abs/1603.05027" target="_blank">deep residual networks</a> which essentially consists of applying BN and ReLU as pre-activation before each convolutional layer.
 It was proved beneficial for acoustic scene classification in <a href="https://arxiv.org/abs/1806.07506" target="_blank">this paper</a>, where it showed convenient generalization properties. Likewise, in preliminary experiments with FSDnoisy18k it was shown to slightly improve the classification accuracy. The baseline system has 531,624 weights and its architecture is summarized in the next figure.
 
-| ![alt text](/figs/baseline_system_archi_v0.png = 250x) |
+| <img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="500"/>|
 |:---:|
 | *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
 
-| <img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="200"/>|
+| <img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="600"/>|
 |:---:|
 | *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
 
+| <img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="700"/>|
+|:---:|
+| *Fig 1. Baseline system architecture with most relevant hyper-parameters.* |
 
 
 As for the learning strategy, the default loss function is categorical cross-entropy (CCE), the batch size is 64, and we use Adam optimizer with initial learning rate of 0.001, which is halved whenever the validation accuracy plateaus for 5 epochs. The training samples are shuffled between epochs. Earlystopping is adopted with a patience of 15 epochs on the validation accuracy. To this end, a 15% validation set is split randomly from the training data of every class. This validation split is the random 15% of every class, considering both *clean* and *noisy* subsets together. Preliminary experiments revealed that this provides slightly better results if compared to using **only** the clean subset for validation (which amounts to roughly 10% of the training set, but it is highly imbalanced class-wise, from 6.1% to 22.4%). 
