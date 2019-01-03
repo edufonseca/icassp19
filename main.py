@@ -103,17 +103,17 @@ params_extract['audio_len_samples'] = int(params_extract.get('fs') * params_extr
 
 # ======================================================== PATHS FOR DATA, FEATURES and GROUND TRUTH
 # where to look for the dataset
-path_root_data = os.path.join('/data', params_ctrl.get('dataset'))
+path_root_data = params_ctrl.get('dataset_path')
 
 params_path = {'path_to_features': os.path.join(path_root_data, 'features'),
                'featuredir_tr': 'audio_train_varup2/',
                'featuredir_te': 'audio_test_varup2/',
                'path_to_dataset': path_root_data,
-               'audiodir_tr': 'audio_train/',
-               'audiodir_te': 'audio_test/',
+               'audiodir_tr': 'FSDnoisy18k.audio_train/',
+               'audiodir_te': 'FSDnoisy18k.audio_test/',
                'audio_shapedir_tr': 'audio_train_shapes/',
                'audio_shapedir_te': 'audio_test_shapes/',
-               'gt_files': os.path.join('ground_truth_csvs', params_ctrl.get('dataset'))}
+               'gt_files': os.path.join(path_root_data, 'FSDnoisy18k.meta')}
 
 
 params_path['featurepath_tr'] = os.path.join(params_path.get('path_to_features'), params_path.get('featuredir_tr'))
@@ -169,11 +169,10 @@ idx_flagnonveri = [i for i, x in enumerate(filelist_audio_tr_flagveri) if x == 0
 noisy_ids = [int(filelist_audio_tr[i].split('.')[0]) for i in idx_flagnonveri]
 params_learn['noisy_ids'] = noisy_ids
 
-# get positions of noisy_small_duration and noisy_small_clips:
-# subsets of the NOISY set of comparable size to that of CLEAN
-filelist_audio_tr_nV_small_dur = train_csv.nV_small_dur.values.tolist()
+# get positions of clips of noisy_small subset
+# subset of the NOISY set of comparable size to that of CLEAN
+filelist_audio_tr_nV_small_dur = train_csv.noisy_small.values.tolist()
 idx_nV_small_dur = [i for i, x in enumerate(filelist_audio_tr_nV_small_dur) if x == 1]
-
 
 # create dict with ground truth mapping with labels:
 # -key: path to wav
@@ -307,7 +306,7 @@ elif params_ctrl.get('train_data') == 'noisy':
     # only files (not path), feature file list for tr, only those that are NOT verified: NOISY SET
     ff_list_tr = [filelist_audio_tr[i].replace('.wav', suffix_in + '.data') for i in idx_flagnonveri]
 
-elif params_ctrl.get('train_data') == 'noisy_small_dur':
+elif params_ctrl.get('train_data') == 'noisy_small':
     # only files (not path), feature file list for tr, only a small portion of the NOISY SET
     # (comparable to CLEAN SET in terms of duration)
     ff_list_tr = [filelist_audio_tr[i].replace('.wav', suffix_in + '.data') for i in idx_nV_small_dur]
@@ -333,13 +332,24 @@ tr_files, val_files = train_test_split(ff_list_tr,
 # to improve data generator
 if flag_origin:
     tr_gen_patch = DataGeneratorPatchOrigin(feature_dir=params_path.get('featurepath_tr'),
-                                      file_list=tr_files,
-                                      params_learn=params_learn,
-                                      params_extract=params_extract,
-                                      suffix_in='_mel',
-                                      suffix_out='_label',
-                                      floatx=np.float32
-                                      )
+                                            file_list=tr_files,
+                                            params_learn=params_learn,
+                                            params_extract=params_extract,
+                                            suffix_in='_mel',
+                                            suffix_out='_label',
+                                            floatx=np.float32
+                                            )
+
+    val_gen_patch = DataGeneratorPatchOrigin(feature_dir=params_path.get('featurepath_tr'),
+                                             file_list=val_files,
+                                             params_learn=params_learn,
+                                             params_extract=params_extract,
+                                             suffix_in='_mel',
+                                             suffix_out='_label',
+                                             floatx=np.float32,
+                                             scaler=tr_gen_patch.scaler
+                                             )
+
 else:
     tr_gen_patch = DataGeneratorPatch(feature_dir=params_path.get('featurepath_tr'),
                                       file_list=tr_files,
@@ -350,19 +360,6 @@ else:
                                       floatx=np.float32
                                       )
 
-# to improve data generator
-if flag_origin:
-    val_gen_patch = DataGeneratorPatchOrigin(feature_dir=params_path.get('featurepath_tr'),
-                                       file_list=val_files,
-                                       params_learn=params_learn,
-                                       params_extract=params_extract,
-                                       suffix_in='_mel',
-                                       suffix_out='_label',
-                                       floatx=np.float32,
-                                       scaler=tr_gen_patch.scaler
-                                       )
-
-else:
     val_gen_patch = DataGeneratorPatch(feature_dir=params_path.get('featurepath_tr'),
                                        file_list=val_files,
                                        params_learn=params_learn,

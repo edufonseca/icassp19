@@ -5,7 +5,7 @@ This repository contains the code corresponding to the following paper. If you u
 
 >Eduardo Fonseca, Manoj Plakal, Daniel P. W. Ellis, Frederic Font, Xavier Favory, Xavier Serra, "Learning Sound Event Classifiers from Web Audio with Noisy Labels", Submitted to *Proc. IEEE ICASSP 2019*, Brighton, UK, 2019
 
-The framework comprises all the basic stages: feature extraction, training, inference and evaluation.
+The framework comprises all the basic stages: feature extraction, training, inference and evaluation. After loading the FSDnoisy18k dataset, log-mel energies are computed and a CNN baseline is trained and evaluated. The code also allows to test four noise-robust loss functions. Please check our ICASSP2019 paper for more details.
 
 **NOTES**: 
 - The code is available and it is functional. 
@@ -22,7 +22,6 @@ This framework is tested on Ubuntu 17.10 using a conda environment. To duplicate
 
 `config/` includes a `*.yaml` file with the parameters for the experiment  
 `logs/` folder where to include output files per experiment  
-`ground_truth_csvs` to store the `train.csv` and `test.csv`, which determine the dataset split
 
 `main.py` is the main script  
 `data.py` contains the data generators  
@@ -36,13 +35,17 @@ This framework is tested on Ubuntu 17.10 using a conda environment. To duplicate
 
 ## Usage
 
+#### (0) Download the dataset:
+
+Download FSDnoisy18k from Zenodo through the <a href="http://www.eduardofonseca.net/FSDnoisy18k/" target="_blank">dataset companion site</a>, unzip it and locate it in a given directory.
+
 #### (1) Edit `config/*.yaml` file:
 
 The goal is to define the parameters of the experiment. The file is structured with self-descriptive sections. The most important parameters are: 
 
-`ctrl.dataset`: folder where the dataset is contained  
-`ctrl.train_data`: define the subset of training data to consider in the experiment. To be decided among: `['all', 'noisy', 'noisy_small_dur', 'clean']` (see paper)   
-`loss.q_loss`: this is an example of a hyper-parameter of a loss function, according to the paper. For example, `q_loss` corresponds to `q` in equation (3) of the paper and `reed_beta` corresponds to `beta` in equation (2).
+`ctrl.dataset_path`: path where the dataset is located, eg, `/data/FSDnoisy18k/`.   
+`ctrl.train_data`: define the subset of training data to consider in the experiment. To be decided among: `['all', 'noisy', 'noisy_small', 'clean']` (see paper)   
+`loss.q_loss`: this is an example of a hyper-parameter of a loss function, according to the paper. For example, `q_loss` corresponds to `q` in equation (3) of the paper and `reed_beta` corresponds to `beta` in equation (2).  
 `loss.type`: defines the loss function. To be decided among:
 
   - `CCE`: categorical_crossentropy aka cross entropy loss
@@ -55,12 +58,9 @@ The goal is to define the parameters of the experiment. The file is structured w
   - `CCE_outlier_origin`: CCE_outlier applied selectively based on data origin*
   - `bootstrapping_origin`: L_soft loss applied selectively based on data origin*
 
-*The selecitve application of the loss functions makes sense when training with the entire train set, ie `ctrl.train_data: all ` (see paper).
+*The selective application of the loss functions makes sense when training with the entire train set (that is, considering clean and noisy data), ie `ctrl.train_data: all ` (see paper).
 
 The rest of the parameters should be rather intuitive.
-
-NOTE: the absolute path where to place the dataset must be defined in `main.py` line 106. For example `‘../dataset/’`.
-
 
 
 #### (2) Execute the code by:
@@ -82,6 +82,11 @@ You can check the `logs/*.out`. Results are shown in a table (you can search for
   - `loss.type: CCE` # this is standard cross entropy loss
  
 #### (2) Execute the code.
+
+## Baseline system details
+
+Add Figure
+
  
 ## Contact
 

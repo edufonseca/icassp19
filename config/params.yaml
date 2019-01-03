@@ -1,8 +1,8 @@
 ctrl:
   feat_ext: true
   learn: true
-  dataset: proto5
-  train_data: noisy
+  train_data: all
+  dataset_path: '/data/FSDKaggle2018x/FSDnoisy18k/'
 extract:
   audio_len_s: 2
   eps: 2.220446049250313e-16
