@@ -2,7 +2,7 @@ ctrl:
   feat_ext: true
   learn: true
   train_data: all
-  dataset_path: '/data/FSDKaggle2018x/FSDnoisy18k/'
+  dataset_path: '/data/FSDnoisy18k/'
 extract:
   audio_len_s: 2
   eps: 2.220446049250313e-16
