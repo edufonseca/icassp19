@@ -1,9 +1,9 @@
 
 ## Learning Sound Event Classifiers from Web Audio with Noisy Labels
 
-This repository contains the code corresponding to the following paper. If you use this code or part of it, please cite:
+This repository contains the code corresponding to the following <a href="https://arxiv.org/abs/1901.01189" target="_blank">paper</a>. If you use this code or part of it, please cite:
 
->Eduardo Fonseca, Manoj Plakal, Daniel P. W. Ellis, Frederic Font, Xavier Favory, Xavier Serra, "Learning Sound Event Classifiers from Web Audio with Noisy Labels", Submitted to *Proc. IEEE ICASSP 2019*, Brighton, UK, 2019
+>Eduardo Fonseca, Manoj Plakal, Daniel P. W. Ellis, Frederic Font, Xavier Favory, Xavier Serra, "Learning Sound Event Classifiers from Web Audio with Noisy Labels", arXiv:1901.01189, 2019
 
 The framework comprises all the basic stages: feature extraction, training, inference and evaluation. After loading the FSDnoisy18k dataset, log-mel energies are computed and a CNN baseline is trained and evaluated. The code also allows to test four noise-robust loss functions. Please check our paper for more details. The system is implemented in Keras and TensorFlow.
 
