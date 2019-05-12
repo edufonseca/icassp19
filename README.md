@@ -91,7 +91,7 @@ It was proved beneficial for acoustic scene classification in <a href="https://a
 
 <p align="center">
 
-<img src="/figs/baseline_system_archi_v0.png" alt="baseline" width="550"/>
+<img src="/figs/baseline_system_archi_v1.png" alt="baseline" width="550"/>
 
 </p>
 
