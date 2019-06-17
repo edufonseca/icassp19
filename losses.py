@@ -249,7 +249,7 @@ def crossentropy_max_origin_wrap(_m):
         _y_true_shape = K.shape(y_true)
         _mask = K.reshape(_mask, (_y_true_shape[0], 1))
 
-        # applying mask to have a valid y_true that we can use as always TODO total or mask?
+        # applying mask to have a valid y_true that we can use as always
         y_true = y_true * _mask
 
         y_true = K.clip(y_true, K.epsilon(), 1)
@@ -291,7 +291,7 @@ def crossentropy_outlier_origin_wrap(_l):
         _y_true_shape = K.shape(y_true)
         _mask = K.reshape(_mask, (_y_true_shape[0], 1))
 
-        # applying mask to have a valid y_true that we can use as always TODO total or mask?
+        # applying mask to have a valid y_true that we can use as always
         y_true = y_true * _mask
 
         y_true = K.clip(y_true, K.epsilon(), 1)
