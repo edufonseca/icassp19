@@ -62,7 +62,11 @@ class Evaluator (object):
         total = 0
         perclass_acc = []
         for label, v in scores.items():
-            mean_acc = (v['acc_cum'] / v['nb_files'])*100
+            # If encounter 0 accuracy, don't want program to crash on divide by zero
+            if v['nb_files'] == 0:
+                mean_acc = 0
+            else:
+                mean_acc = (v['acc_cum'] / v['nb_files'])*100
             print('%-21s | number of files in total: %-4d | Accuracy: %6.3f' % (label, v['nb_files'], mean_acc))
             perclass_acc.append(mean_acc)
             total += v['nb_files']
