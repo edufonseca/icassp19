@@ -59,7 +59,7 @@ print('\nYaml file with parameters defining the experiment: %s\n' % str(args.par
 # =========================================================================Parameters, paths and variables
 
 # Read parameters file from yaml passed by argument
-params = yaml.load(open(args.params_yaml))
+params = yaml.load(open(args.params_yaml), Loader=yaml.SafeLoader)
 params_ctrl = params['ctrl']
 params_extract = params['extract']
 params_learn = params['learn']
